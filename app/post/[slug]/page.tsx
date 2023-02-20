@@ -12,6 +12,17 @@ type URL = {
     }
 }
 
+interface Comment {
+    id: number;
+    message: string;
+    createdAt: string;
+    user: {
+      id: number;
+      name: string;
+      image: string;
+    };
+  }
+
 
 const fetchDetails = async (slug: string) => {
     const response = await axios.get(`/api/posts/${slug}`)
@@ -32,7 +43,7 @@ export default function PostDetail(url: URL) {
         <div>
             <Post id={data.id} name={data.user.name} avatar={data.user.image}  postTitle={data.title} comments={data.Comment}/>
        <AddComment id={data?.id} />
-       {data?.Comment?.map((comment) => (
+       {data?.Comment?.map((comment: Comment) => (
         <div key={comment.id} className="my-6 bg-white p-8 rounded-md">
             <div className="flex items-center gap-2">
             <Image
