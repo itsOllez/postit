@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import axios from 'axios'
-import { AuthPosts } from "../types/authPosts"
+import { AuthPosts } from "../types/AuthPosts"
 import EditPost from "./EditPost"
 
 const fetchAuthPosts = async () => {
