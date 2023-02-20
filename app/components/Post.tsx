@@ -30,7 +30,7 @@ export default function Post({ avatar, name, postTitle, id, comments } : PostPro
             <div className="flex gap-4 cursor-pointer items-center">
                 <Link href={`/post/${id}`}>
                     <p className="text-sm font-bold text-gray-700">
-                       {comments.length} Comments
+                       {comments?.length} Comments
                     </p>
                 </Link>
             </div>
