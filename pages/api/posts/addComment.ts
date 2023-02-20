@@ -14,7 +14,7 @@ export default async function handler(
 
         //find user
         const prismaUser = await prisma.user.findUnique({
-            where: {email: session?.user?.email}
+            where: {email: session?.user?.email!}
         })
 
 
@@ -25,6 +25,10 @@ export default async function handler(
                 return res.status(401).json({message: "Please do not leave the comment empty"})
             }
 
+            if (!prismaUser) {
+                return res.status(401).json({ message: "User not found" });
+              }
+              
             const result = await prisma.comment.create({
                 data: {
                     message: title,

@@ -17,7 +17,7 @@ export default async function handler(
 
         //get user
         const prismaUser = await prisma.user.findUnique({
-            where: {email: session?.user?.email}
+            where: {email: session?.user?.email!}
         })
 
         // check title
@@ -28,6 +28,10 @@ export default async function handler(
             return res.status(401).json({message: "Please do not leave the title empty"})
         }
 
+        if (!prismaUser) {
+            return res.status(401).json({message: "User not found"})
+        }
+        
         //Create post
         try {
             const result = await prisma.post.create({
