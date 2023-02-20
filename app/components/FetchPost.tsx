@@ -16,16 +16,19 @@ export default function FetchPost() {
         queryFn: allPosts, 
         queryKey: ['posts'],
     })
-    if (error) return error
-    if (isLoading) return 'Loading...'
 
-    console.log(data)
+    if (isLoading) {
+        return(<div>Loadin...</div>)
+    }
+    if (error) {
+        return(<div>There's a problem...</div>)
+    }
 
     return(
         <div>
         {data?.map((post) => (
             <Post key={post.id} id={post.id} name={post.user.name} avatar={post.user.image} postTitle={post.title} comments={post.Comment} />
             )) }
-    </div>
+        </div>
     )
 }
